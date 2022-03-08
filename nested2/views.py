@@ -32,6 +32,8 @@ def summ_article(url):
     date = article.publish_date
     date = str(date.strftime("%m/%d/%Y"))
     article_img = str(article.top_image)
+    print(f"")
+    print()
     print(f"Author: {article.authors}\n")
     print(f"Publish Date: {date}\n")
     print(f"Top Image Url: {article_img}\n")
