@@ -2,12 +2,9 @@ from news_extract import *
 from news_scrape import *
 from news_nlp import *
 import time
-import smtplib
-from email.message import EmailMessage
-
 
 # Welcome Messages and Introduction
-print("Welcome to the AmberNoir Project. \nIn seconds, you will have access to the latest articles "
+print("Welcome to the Newspaper Scrape Project. \nIn seconds, you will have access to the latest articles "
       "in the technology section of the New York Times. \nIn addition, you will also be able to know whether the "
       "article is positive or negative and the extent of the writer's bias.")
 print()
@@ -28,7 +25,6 @@ content_string = get_content_string(my_url)
 starts, ends = find_occurrences(content_string)
 url_list = get_all_urls(starts, ends, content_string)
 
-
 # Gets the article summary and performs sentiment analysis on the chosen URL.
 # For more information on how this works, visit news_scrape.py and news_nlp.py!
 for url in url_list:
@@ -42,23 +38,4 @@ for url in url_list:
 print()
 print("The articles have been successfully extracted!")
 print("In total, we were able to extract " + str(len(url_list)) + " different articles!")
-#article num
-
 print("Thanks for participating, " + name + "!")
-
-def email_alert(subject, body, to):
-    msg = EmailMessage()
-    msg.set_content(body)
-    msg['subject'] = subject
-    msg['to'] = to 
-    user = "ambernoir.updates@gmail.com"
-    msg['from'] = user
-    password = "qwnqyeycalhfriwf"
-    
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
-    server.login(user, password)
-    server.send_message(msg)
-    server.quit()
-
-email_alert("")

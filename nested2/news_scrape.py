@@ -1,25 +1,19 @@
 # Description: This program scrapes and summarizes news articles from the New York Times.
 
 from newspaper import Article
-import numpy as np
-from news_extract import *
-from news_nlp import *
-from models import scrapped_data
+
+
 # Summarizes the article and provides valuable information regarding the article metadata, including images and
 # attributions.
 def summarize_article(url):
     article = Article(url)
+
     article.download()
     article.parse()
     # Punkt is a sentence tokenizer which is useful for extracting and detecting text.
     article.download('punkt')
     article.nlp()
-    # article title
-    #scrapped_data.article_title = article
-    # article date
-    #date = article.publish_date
-    #scrapped_data.article_date = str(date.strftime("%m/%d/%Y"))
-   
+
     # Gets the author or authors of the article
     author_string = "Author(s): "
     for author in article.authors:
@@ -40,17 +34,12 @@ def summarize_article(url):
     image_string = "All Images: "
     for image in article.images:
         image_string += "\n\t" + image  # adds a newline and a tab before each image is printed
-        
-    # article imgs
-    #scrapped_data.article_IMG = image_string
     print(image_string)
     print()
 
     # Gets the article summary
     print("A Quick Article Summary")
     print("----------------------------------------")
-    #scrapped_data.article_summ = article.summary
     print(article.summary)
 
-    
     return article.summary
